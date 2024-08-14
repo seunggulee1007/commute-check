@@ -24,7 +24,7 @@ class AccountEntity extends UpdatedEntity {
     private Long id;
 
     @Column(unique = true, nullable = false)
-    private UUID memberId;
+    private UUID accountId;
 
     /**
      * 이름
@@ -55,7 +55,7 @@ class AccountEntity extends UpdatedEntity {
 
     public static AccountEntity createNewMember(Account account, PasswordEncoder passwordEncoder) {
         AccountEntity accountEntity = new AccountEntity();
-        accountEntity.memberId = UUID.randomUUID();
+        accountEntity.accountId = UUID.randomUUID();
         accountEntity.email = account.email();
         accountEntity.nickname = account.nickname();
         accountEntity.password = passwordEncoder.encode(account.password());
@@ -66,7 +66,7 @@ class AccountEntity extends UpdatedEntity {
     public Account mapToDomain() {
         return Account.builder()
             .id(this.id)
-            .accountId(AccountId.of(this.memberId.toString()))
+            .accountId(AccountId.of(this.accountId.toString()))
             .email(this.email)
             .nickname(this.nickname)
             .roles(this.roles)
