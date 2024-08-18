@@ -7,6 +7,17 @@ spring:
     properties:
       hibernate:
         show_sql: true
+  profiles:
+    active: default
+    include: encrypt
+  datasource:
+    url: ENC(yEiKM2DqZ0H6N1g9pV24CeSVpMcfuQGQ570TS8A458cGWjZHFf0HgQ9uvcvJqempS2bSKD7ll2Q=)
+    username: ENC(qCIxuJQlqzQ0n4f2rKjDPg==)
+    password: ENC(ZuM+BxIO8f+48Q3gBMt63ToZAGs8ivxK)
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      pool-name: HikariCP
+
 logging:
   level:
     root: INFO
@@ -17,9 +28,10 @@ logging:
         descriptor:
           sql:
             BasicBinder: TRACE
+
 jwt:
   token:
     header: Authorization
-    issuer: seunggulee
-    client-secret: dpsdpdlcldpsdlstktjqltmroqkfxlawlrkrgkwlakfwk
+    issuer: ENC(Imgv586l1JMdsWqhq+Fh2wBi7sACl7wR)
+    client-secret: ENC(6xwFLB3b9DfgdIda+JQBS9VFGDsBwwIyqWNqlswROsyvYYylKhkoozee+9POMKgXhfgu7w3J4lo=)
     token-validity-in-milliseconds: 300000
