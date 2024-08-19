@@ -3,6 +3,7 @@ package com.yeseung.commutecheck.modules.crawling.application.service;
 import com.yeseung.commutecheck.common.annotations.ServiceAdapter;
 import com.yeseung.commutecheck.modules.crawling.application.port.in.CGVCrawlerUseCase;
 import com.yeseung.commutecheck.modules.crawling.application.port.out.MovieSaveOutPort;
+import com.yeseung.commutecheck.modules.crawling.application.port.out.MovieSearchOutPort;
 import com.yeseung.commutecheck.modules.crawling.domain.Movie;
 import lombok.RequiredArgsConstructor;
 
@@ -15,11 +16,17 @@ public class CGVCrawlerService implements CGVCrawlerUseCase {
 
     private final CGVCrawler cgvCrawler;
     private final MovieSaveOutPort movieSaveOutPort;
+    private final MovieSearchOutPort movieSearchOutPort;
 
     @Override
     public List<Movie> crawlCgvMovie() throws IOException {
         List<Movie> movies = cgvCrawler.getMovies();
         return movieSaveOutPort.saveMovie(movies);
+    }
+
+    @Override
+    public List<Movie> crawlCgvMovieByDate(String date) {
+        return movieSearchOutPort.getMovieByDate(date);
     }
 
 }

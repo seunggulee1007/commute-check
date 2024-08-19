@@ -9,4 +9,6 @@ public interface CGVCrawlerUseCase {
 
     List<Movie> crawlCgvMovie() throws IOException;
 
+    List<Movie> crawlCgvMovieByDate(String date);
+
 }

@@ -1,4 +1,4 @@
-package com.yeseung.commutecheck.modules.crawling.adapter.in;
+package com.yeseung.commutecheck.modules.crawling.adapter.in.web;
 
 import com.yeseung.commutecheck.modules.crawling.domain.Movie;
 import lombok.EqualsAndHashCode;
