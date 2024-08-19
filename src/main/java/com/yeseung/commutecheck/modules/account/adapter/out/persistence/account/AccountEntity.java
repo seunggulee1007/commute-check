@@ -1,6 +1,6 @@
 package com.yeseung.commutecheck.modules.account.adapter.out.persistence.account;
 
-import com.yeseung.commutecheck.common.advice.exceptions.NotValidMemberException;
+import com.yeseung.commutecheck.common.advice.exceptions.NotValidAccountException;
 import com.yeseung.commutecheck.modules.account.adapter.out.persistence.UpdatedEntity;
 import com.yeseung.commutecheck.modules.account.domain.Account;
 import com.yeseung.commutecheck.modules.account.domain.AccountId;
@@ -53,7 +53,7 @@ class AccountEntity extends UpdatedEntity {
     @CollectionTable(name = "account_roles", joinColumns = @JoinColumn(name = "id"))
     private Set<AccountRole> roles = Set.of(AccountRole.USER);
 
-    public static AccountEntity createNewMember(Account account, PasswordEncoder passwordEncoder) {
+    public static AccountEntity createNewAccount(Account account, PasswordEncoder passwordEncoder) {
         AccountEntity accountEntity = new AccountEntity();
         accountEntity.accountId = UUID.randomUUID();
         accountEntity.email = account.email();
@@ -75,7 +75,7 @@ class AccountEntity extends UpdatedEntity {
 
     public void login(PasswordEncoder passwordEncoder, String credential) {
         if (!passwordEncoder.matches(credential, this.password)) {
-            throw new NotValidMemberException("계정이 존재하지 않거나 비밀번호가 일치하지 않습니다.");
+            throw new NotValidAccountException("계정이 존재하지 않거나 비밀번호가 일치하지 않습니다.");
         }
     }
 

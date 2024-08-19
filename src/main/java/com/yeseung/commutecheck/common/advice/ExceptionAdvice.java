@@ -1,9 +1,8 @@
 package com.yeseung.commutecheck.common.advice;
 
-
 import com.yeseung.commutecheck.common.advice.exceptions.AlreadyPresentAccountException;
 import com.yeseung.commutecheck.common.advice.exceptions.NotMatchedPasswordException;
-import com.yeseung.commutecheck.common.advice.exceptions.NotValidMemberException;
+import com.yeseung.commutecheck.common.advice.exceptions.NotValidAccountException;
 import com.yeseung.commutecheck.common.utils.ApiUtil;
 import jakarta.validation.ConstraintViolationException;
 import lombok.extern.slf4j.Slf4j;
@@ -12,7 +11,8 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import static com.yeseung.commutecheck.common.utils.ApiUtil.fail;
-import static org.springframework.http.HttpStatus.*;
+import static org.springframework.http.HttpStatus.BAD_REQUEST;
+import static org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR;
 
 @Slf4j
 @RestControllerAdvice
@@ -28,7 +28,7 @@ public class ExceptionAdvice {
     @ExceptionHandler({
         AlreadyPresentAccountException.class,
         NotMatchedPasswordException.class,
-        NotValidMemberException.class,
+        NotValidAccountException.class,
         ConstraintViolationException.class,
     })
     @ResponseStatus(BAD_REQUEST)
