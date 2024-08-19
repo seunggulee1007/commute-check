@@ -1,8 +1,10 @@
 package com.yeseung.commutecheck.modules.account.adapter.in.web;
 
-import com.kakaoinsurance.payment.application.port.in.member.RegisterMemberCommand;
+import com.yeseung.commutecheck.modules.account.application.port.in.RegisterAccountCommand;
 import lombok.Getter;
 import lombok.Setter;
+
+import static org.springframework.beans.BeanUtils.copyProperties;
 
 /**
  * 회원 등록 요청 객체
@@ -30,11 +32,16 @@ public class RegisterAccountRequest {
      */
     private String confirmPassword;
 
-    public RegisterMemberCommand mapToCommand() {
-        RegisterMemberCommand registerMemberCommand = new RegisterMemberCommand();
-        copyProperties(this, registerMemberCommand);
-        registerMemberCommand.validateSelf();
-        return registerMemberCommand;
+    /**
+     * 사번
+     */
+    private String empNumber;
+    
+    public RegisterAccountCommand mapToCommand() {
+        RegisterAccountCommand registerAccountCommand = new RegisterAccountCommand();
+        copyProperties(this, registerAccountCommand);
+        registerAccountCommand.validateSelf();
+        return registerAccountCommand;
     }
 
 }

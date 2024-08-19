@@ -60,6 +60,7 @@ class AccountEntity extends UpdatedEntity {
         accountEntity.nickname = account.nickname();
         accountEntity.password = passwordEncoder.encode(account.password());
         accountEntity.roles = account.roles();
+        accountEntity.empNumber = account.empNumber();
         return accountEntity;
     }
 
@@ -69,6 +70,7 @@ class AccountEntity extends UpdatedEntity {
             .accountId(AccountId.of(this.accountId.toString()))
             .email(this.email)
             .nickname(this.nickname)
+            .empNumber(this.empNumber)
             .roles(this.roles)
             .build();
     }

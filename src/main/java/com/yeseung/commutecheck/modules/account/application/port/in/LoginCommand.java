@@ -1,6 +1,6 @@
 package com.yeseung.commutecheck.modules.account.application.port.in;
 
-import com.kakaoinsurance.payment.common.SelfValidating;
+import com.yeseung.commutecheck.common.SelfValidating;
 import jakarta.validation.constraints.NotNull;
 import lombok.AccessLevel;
 import lombok.Getter;

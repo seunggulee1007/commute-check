@@ -14,14 +14,4 @@ public interface GetAccountPort {
      */
     Account getAccountByEmailAndPassword(String email, String password);
 
-    /**
-     * 회원 식별자와 비밀번호가 일치하는 회원 조회
-     * 시큐리티에서 인증시 사용하기 때문에 인덱스인 회원 아이디로 조회 ( 인증 때문에 빈번하게 조회 됨으로 인덱스 사용 )
-     *
-     * @param accountId 회원 식별자
-     * @param password  비밀번호
-     * @return 조회된 회원
-     */
-    Account getAccountByIdAndPassword(Long accountId, String password);
-
 }

@@ -1,6 +1,7 @@
 package com.yeseung.commutecheck.modules.account.adapter.out.jwt;
 
 import com.yeseung.commutecheck.common.annotations.PersistenceAdapter;
+import com.yeseung.commutecheck.modules.account.application.port.out.AuthenticationJwtPort;
 import com.yeseung.commutecheck.modules.account.domain.Account;
 import com.yeseung.commutecheck.modules.account.domain.AccountRole;
 import com.yeseung.commutecheck.modules.account.domain.JwtToken;
@@ -8,7 +9,7 @@ import lombok.RequiredArgsConstructor;
 
 @PersistenceAdapter
 @RequiredArgsConstructor
-public class JwtAdapter {
+public class JwtAdapter implements AuthenticationJwtPort {
 
     private final Jwt jwt;
 

@@ -16,7 +16,10 @@ public record Account(
     String password,
     // 이메일
     String email,
+    // 사번
+    String empNumber,
     // 권한 set
     Set<AccountRole> roles
 ) {
+
 }
