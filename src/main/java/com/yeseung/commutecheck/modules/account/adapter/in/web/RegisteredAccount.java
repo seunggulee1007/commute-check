@@ -18,11 +18,14 @@ public class RegisteredAccount {
      */
     private String email;
 
+    private String empNumber;
+
     public static RegisteredAccount mapToDto(Account account) {
         RegisteredAccount registeredMember = new RegisteredAccount();
         registeredMember.accountId = account.accountId().getId();
         registeredMember.nickname = account.nickname();
         registeredMember.email = account.email();
+        registeredMember.empNumber = account.empNumber();
         return registeredMember;
     }
 

@@ -4,6 +4,7 @@ import com.yeseung.commutecheck.common.advice.exceptions.AlreadyPresentAccountEx
 import com.yeseung.commutecheck.common.advice.exceptions.NotValidAccountException;
 import com.yeseung.commutecheck.common.annotations.PersistenceAdapter;
 import com.yeseung.commutecheck.modules.account.application.port.out.GetAccountOutPort;
+import com.yeseung.commutecheck.modules.account.application.port.out.GetAccountPort;
 import com.yeseung.commutecheck.modules.account.application.port.out.RegisterAccountOutPort;
 import com.yeseung.commutecheck.modules.account.domain.Account;
 import lombok.RequiredArgsConstructor;
@@ -17,7 +18,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
  */
 @PersistenceAdapter
 @RequiredArgsConstructor
-public class AccountPersistenceAdapterOut implements GetAccountOutPort, RegisterAccountOutPort {
+public class AccountPersistenceAdapterOut implements GetAccountOutPort, RegisterAccountOutPort, GetAccountPort {
 
     private final AccountRepository accountRepository;
     private final PasswordEncoder passwordEncoder;
@@ -48,6 +49,13 @@ public class AccountPersistenceAdapterOut implements GetAccountOutPort, Register
         });
         AccountEntity accountEntity = AccountEntity.createNewAccount(account, passwordEncoder);
         accountRepository.save(accountEntity);
+        return accountEntity.mapToDomain();
+    }
+
+    @Override
+    public Account getAccountByEmailAndPassword(String email, String password) {
+        AccountEntity accountEntity = accountRepository.findByEmail(email).orElseThrow(NotValidAccountException::new);
+        accountEntity.login(passwordEncoder, password);
         return accountEntity.mapToDomain();
     }
 
