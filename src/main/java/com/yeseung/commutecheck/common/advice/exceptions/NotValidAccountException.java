@@ -1,12 +1,12 @@
 package com.yeseung.commutecheck.common.advice.exceptions;
 
-public class NotValidMemberException extends RuntimeException {
+public class NotValidAccountException extends RuntimeException {
 
-    public NotValidMemberException() {
+    public NotValidAccountException() {
         super("일치하는 계정이 존재하지 않습니다.");
     }
 
-    public NotValidMemberException(String message) {
+    public NotValidAccountException(String message) {
         super(message);
     }
 
