@@ -38,3 +38,9 @@ jwt:
 
 server:
   port: 9232
+
+crawler:
+  cgv:
+    url:
+      default-url: http://www.cgv.co.kr
+      image: https://img.cgv.co.kr
