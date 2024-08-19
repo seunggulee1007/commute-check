@@ -35,3 +35,10 @@ jwt:
     issuer: ENC(Imgv586l1JMdsWqhq+Fh2wBi7sACl7wR)
     client-secret: ENC(6xwFLB3b9DfgdIda+JQBS9VFGDsBwwIyqWNqlswROsyvYYylKhkoozee+9POMKgXhfgu7w3J4lo=)
     token-validity-in-milliseconds: 300000
+
+crawler:
+  cgv:
+    url:
+      default-url: http://www.cgv.co.kr
+      image: https://img.cgv.co.kr
+      movie: ${crawler.cgv.url.default-url}/movies/?lt=1&ft=0

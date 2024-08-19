@@ -7,8 +7,10 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 @EnableJpaAuditing
 @SpringBootApplication
-@ConfigurationPropertiesScan(basePackages = {"com.yeseung.commutecheck.common.properties",
-    "com.ulisesbocchio.jasyptspringboot.properties"})
+@ConfigurationPropertiesScan(
+    basePackages = {"com.yeseung.commutecheck.common.properties",
+        "com.ulisesbocchio.jasyptspringboot.properties",
+        "com.yeseung.commutecheck.modules.crawling.properties"})
 public class CommuteCheckApplication {
 
     public static void main(String[] args) {
