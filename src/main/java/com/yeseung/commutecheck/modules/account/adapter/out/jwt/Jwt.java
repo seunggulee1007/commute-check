@@ -33,7 +33,7 @@ public class Jwt {
         builder.withIssuer(issuer);
         builder.withIssuedAt(now);
         builder.withExpiresAt(new Date(now.getTime() + expireTime));
-        builder.withClaim(JwtInfo.MEMBER_ID.name(), claims.memberId);
+        builder.withClaim(JwtInfo.MEMBER_ID.name(), claims.accountId);
         builder.withClaim(JwtInfo.ID.name(), claims.id);
         builder.withClaim(JwtInfo.EMAIL.name(), claims.email);
         builder.withClaim(JwtInfo.NICKNAME.name(), claims.nickname);
@@ -61,7 +61,7 @@ public class Jwt {
     public static class Claims {
 
         private Long id;
-        private String memberId;
+        private String accountId;
         private String email;
         private String nickname;
         private String[] roles;
@@ -77,7 +77,7 @@ public class Jwt {
             }
             Claim memberIdClaim = decodedJWT.getClaim(JwtInfo.MEMBER_ID.name());
             if (!memberIdClaim.isNull()) {
-                this.memberId = memberIdClaim.asString();
+                this.accountId = memberIdClaim.asString();
             }
             Claim emailClaim = decodedJWT.getClaim(JwtInfo.EMAIL.name());
             if (!emailClaim.isNull()) {
@@ -100,7 +100,7 @@ public class Jwt {
         public static Claims of(long userKey, String memberId, String email, String nickname, String[] roles) {
             Claims claims = new Claims();
             claims.id = userKey;
-            claims.memberId = memberId;
+            claims.accountId = memberId;
             claims.email = email;
             claims.nickname = nickname;
             claims.roles = roles;

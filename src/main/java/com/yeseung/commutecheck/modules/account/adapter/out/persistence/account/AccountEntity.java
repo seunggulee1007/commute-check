@@ -1,7 +1,7 @@
 package com.yeseung.commutecheck.modules.account.adapter.out.persistence.account;
 
 import com.yeseung.commutecheck.common.advice.exceptions.NotValidAccountException;
-import com.yeseung.commutecheck.modules.account.adapter.out.persistence.UpdatedEntity;
+import com.yeseung.commutecheck.common.entity.UpdatedEntity;
 import com.yeseung.commutecheck.modules.account.domain.Account;
 import com.yeseung.commutecheck.modules.account.domain.AccountId;
 import com.yeseung.commutecheck.modules.account.domain.AccountRole;

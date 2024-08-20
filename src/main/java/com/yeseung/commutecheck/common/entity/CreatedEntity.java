@@ -1,4 +1,4 @@
-package com.yeseung.commutecheck.modules.account.adapter.out.persistence;
+package com.yeseung.commutecheck.common.entity;
 
 import jakarta.persistence.EntityListeners;
 import jakarta.persistence.MappedSuperclass;

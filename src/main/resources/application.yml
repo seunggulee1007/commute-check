@@ -44,3 +44,7 @@ crawler:
     url:
       default-url: http://www.cgv.co.kr
       image: https://img.cgv.co.kr
+
+commute:
+  late-time: 08:30 # 지각 시간
+  late-count: 3 # 지각 체크 횟수

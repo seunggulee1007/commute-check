@@ -1,4 +1,4 @@
-package com.yeseung.commutecheck.modules.account.adapter.out.persistence;
+package com.yeseung.commutecheck.common.entity;
 
 import jakarta.persistence.EntityListeners;
 import jakarta.persistence.MappedSuperclass;
@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 public class UpdatedEntity extends CreatedEntity {
 
     @LastModifiedBy
-    protected Long updateBy;
+    protected String updateBy;
 
     @LastModifiedDate
     protected LocalDateTime updateDate;
