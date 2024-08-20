@@ -1,5 +1,6 @@
 package com.yeseung.commutecheck.common.security;
 
+import com.yeseung.commutecheck.common.properties.AppProperties;
 import com.yeseung.commutecheck.common.properties.JwtProperties;
 import com.yeseung.commutecheck.modules.account.adapter.out.jwt.EntryPointHandler;
 import com.yeseung.commutecheck.modules.account.adapter.out.jwt.Jwt;
@@ -20,6 +21,11 @@ import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+
+import java.util.List;
 
 @Slf4j
 @Configuration
@@ -35,6 +41,8 @@ public class SecurityConfig {
 
     private final EntryPointHandler unAuthorizedHandler;
 
+    private final AppProperties appProperties;
+
     @Bean
     public JwtAuthenticationTokenFilter jwtAuthenticationTokenFilter() {
         return new JwtAuthenticationTokenFilter(jwtProperties.getHeader(), jwt);
@@ -44,7 +52,7 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.httpBasic(AbstractHttpConfigurer::disable)
             .csrf(AbstractHttpConfigurer::disable)
-            .cors(AbstractHttpConfigurer::disable)
+            .cors(c -> c.configurationSource(corsConfigurationSource()))
             .exceptionHandling(handle -> handle.accessDeniedHandler(jwtAccessDeniedHandler).authenticationEntryPoint(unAuthorizedHandler)).headers(
                 config -> config.frameOptions(HeadersConfigurer.FrameOptionsConfig::sameOrigin)).sessionManagement(session -> session.sessionCreationPolicy(
                 SessionCreationPolicy.STATELESS)).authorizeHttpRequests(request -> request.requestMatchers("/swagger-ui/**",
@@ -54,6 +62,22 @@ public class SecurityConfig {
                                                                                                            "/actuator/**").permitAll()
                 .anyRequest().authenticated()).addFilterBefore(jwtAuthenticationTokenFilter(), UsernamePasswordAuthenticationFilter.class);
         return http.build();
+    }
+
+    private CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration config = new CorsConfiguration();
+        List<String> allowDomains = appProperties.getAllowDomains();
+        config.setAllowedOrigins(allowDomains);
+        config.setAllowedMethods(List.of("GET", "PUT", "DELETE", "POST", "PATCH", "OPTIONS", "HEAD"));
+        config.setExposedHeaders(List.of("Access-Control-Allow-Headers",
+                                         "ACCESS_TOKEN",
+                                         "Access-Control-Allow-Origin",
+                                         "strict-origin-when-cross-origin"));
+        config.setAllowedHeaders(List.of("*"));
+        config.setAllowCredentials(true);
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", config);
+        return source;
     }
 
     @Bean
