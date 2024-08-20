@@ -44,6 +44,7 @@ crawler:
     url:
       default-url: http://www.cgv.co.kr
       image: https://img.cgv.co.kr
+      movie: ${crawler.cgv.url.default-url}/movies/?lt=1&ft=0
 
 commute:
   late-time: 08:30 # 지각 시간
