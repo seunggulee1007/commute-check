@@ -3,9 +3,11 @@ package com.yeseung.commutecheck.common.advice;
 import com.yeseung.commutecheck.common.advice.exceptions.AlreadyPresentAccountException;
 import com.yeseung.commutecheck.common.advice.exceptions.NotMatchedPasswordException;
 import com.yeseung.commutecheck.common.advice.exceptions.NotValidAccountException;
+import com.yeseung.commutecheck.common.advice.exceptions.NotValidJwtTokenException;
 import com.yeseung.commutecheck.common.utils.ApiUtil;
 import jakarta.validation.ConstraintViolationException;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -36,6 +38,15 @@ public class ExceptionAdvice {
     public ApiUtil.ApiResult<Void> badRequest(Exception e) {
         log.error("e :: {}, message :: {}", e.getClass().getName(), e.getMessage());
         return fail(e, BAD_REQUEST);
+    }
+
+    @ExceptionHandler({
+        NotValidJwtTokenException.class
+    })
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    protected ApiUtil.ApiResult<Void> notValidJwtTokenException(Exception e) {
+        e.printStackTrace();
+        return fail(e.getMessage(), -401);
     }
 
 }

@@ -49,3 +49,7 @@ crawler:
 commute:
   late-time: 08:30 # 지각 시간
   late-count: 3 # 지각 체크 횟수
+
+app:
+  allow-domains:
+    - http://localhost:3000

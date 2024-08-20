@@ -24,7 +24,7 @@ public class CrawlingController {
     }
 
     @GetMapping("/date/{date}")
-    public ResponseEntity<List<CGVCrawlerResponse>> crawlCgvMovieByDate(@PathVariable String date) throws IOException {
+    public ResponseEntity<List<CGVCrawlerResponse>> crawlCgvMovieByDate(@PathVariable String date) {
         // CGV 영화 조회
         List<Movie> movies = cgvCrawlerUseCase.crawlCgvMovieByDate(date);
         return ResponseEntity.ok(movies.stream().map(CGVCrawlerResponse::mapToResponse).toList());
