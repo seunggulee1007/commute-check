@@ -31,7 +31,8 @@ public class CGVCrawler {
         List<Movie> movies = new ArrayList<>();
         for (Element item : movieElements) {
             Element boxImage = item.selectFirst("div.box-image");
-            if (boxImage == null) {
+            Element boxContents = item.selectFirst("div.box-contents");
+            if (boxContents == null || boxImage == null) {
                 continue;
             }
             String rank = Objects.requireNonNull(boxImage.selectFirst("strong.rank")).text().trim();
@@ -39,9 +40,6 @@ public class CGVCrawler {
                 crawlerProperties.getCgv().getUrl().getDefaultUrl() + Objects.requireNonNull(boxImage.selectFirst("a")).attr("href");
             String imageLink = Objects.requireNonNull(boxImage.selectFirst("img")).attr("src");
 
-            Element boxContents = item.selectFirst("div.box-contents");
-            if (boxContents == null)
-                continue;
             String title = Objects.requireNonNull(boxContents.selectFirst("strong.title")).text().trim();
             String percent = Objects.requireNonNull(boxContents.selectFirst("div.score > strong.percent")).text();
             String txtInfo = Objects.requireNonNull(boxContents.selectFirst("span.txt-info")).text().replaceAll("\\s+", " ");
